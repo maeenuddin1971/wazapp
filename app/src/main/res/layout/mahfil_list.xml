@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginBottom="3dp"
+
+    app:cardElevation="1dp"
+    app:cardCornerRadius="4dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_margin="4dp">
+
+
+        <TextView
+            android:id="@+id/mahfiltype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Line 1"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Line 2"
+            android:layout_below="@+id/mahfiltype"
+            android:id="@+id/mahfilplace"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mahfilplace"
+            android:id="@+id/mahfildate"
+            android:text="Line 3"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

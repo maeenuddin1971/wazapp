@@ -4,8 +4,11 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment {
         List<String> uniql=new ArrayList<>();
         DatabaseReference ref = database.getReference("rahim");
         dialog.show();
+        SearchView s=(SearchView) root.findViewById(R.id.serc);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -83,6 +87,9 @@ public class HomeFragment extends Fragment {
                     exampleList.add(new maolana(picl.get(ip), namel.get(ip),uniql.get(ip) ));
                 }
                 //exampleList.add(new maolana("uddin", "mollah", "maeen"));
+
+
+
                 dialog.cancel();
                 mRecyclerView = root.findViewById(R.id.recyclerView);
                 mRecyclerView.setHasFixedSize(true);
@@ -93,6 +100,23 @@ public class HomeFragment extends Fragment {
                 mRecyclerView.setAdapter(mAdapter);
 
 
+
+
+                s.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        mAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
+
+
+
             }
 
             @Override
@@ -100,6 +124,10 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+
+       // SearchView s=root.findViewById(R.id.serc);
+
 
         Log.d("ekram",list.toString());
 
@@ -114,6 +142,8 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+
 
 
     

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,10 +15,11 @@ import com.example.wazappbd.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class mahfiladapter extends RecyclerView.Adapter<mahfiladapter.Mahfilclass>{
+public class mahfiladapter extends RecyclerView.Adapter<mahfiladapter.Mahfilclass> implements Filterable {
     private ArrayList<maolana> mExampleList;
     private ArrayList<maolana> ExampleListfull;
 
@@ -86,4 +89,48 @@ public class mahfiladapter extends RecyclerView.Adapter<mahfiladapter.Mahfilclas
     public int getItemCount() {
         return mExampleList.size();
     }
+
+
+///*
+
+    @Override
+    public Filter getFilter() {
+        return examplefilter;
+    }
+
+    private Filter examplefilter=new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<maolana> filterlist=new ArrayList<>();
+            if(constraint==null || constraint.length()==0)
+            {
+                filterlist.addAll(ExampleListfull);
+            }
+            else
+            {
+                String filterpattern=constraint.toString().toLowerCase().trim();
+
+                for(maolana item:ExampleListfull)
+                {
+                    if(item.getText1().toLowerCase().contains(filterpattern))
+                    {
+                        filterlist.add(item);
+                    }
+                }
+
+            }
+            FilterResults results=new FilterResults();
+            results.values=filterlist;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mExampleList.clear();
+            mExampleList.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+//*/
+
 }
